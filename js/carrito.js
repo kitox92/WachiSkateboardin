@@ -68,10 +68,43 @@
     totalBuying.className = "total-content"
     totalBuying.innerHTML = `Total a pagar: ${total} $
      
-    <button type="button" class="btn btn-secondary">Comprar</button> 
-    </div>`;
+    <button type="button" id="comprarCarrito" onClick="compra()" class="btn btn-secondary">Comprar</button>`;
     modalContainer.append(totalBuying);
+
+    
 };
+
+function compra(){
+    if (carrito.length > 0) {
+        Swal.fire({
+            title: 'Desea confirmar la compra?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Compra confirmada',
+                    text: 'Usted sera redirigido a la pagina principal',
+                  })
+                localStorage.clear();
+                setTimeout( function() { window.location.href = "../index.html"; }, 4000 );
+            }
+          })
+    }
+    else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El carrito esta vacio',
+          })
+    }
+}
+   
 
 verCarrito.addEventListener("click", pintarCarrito);
 
