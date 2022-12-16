@@ -96,6 +96,8 @@ function compra(){
             }
           })
     }
+
+
     else {
         Swal.fire({
             icon: 'error',
